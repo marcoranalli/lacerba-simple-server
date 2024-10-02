@@ -62,20 +62,21 @@ app.get('/diff/:number1/:number2', (req, res) => {
         `);
 });
 
-let cnt = 0;
+app.get('/stats?nums=:num1&nums=:num2&nums=num3', (req, res) => {
+    const nums:number[] = (req.query.nums as string[]).map((n) => Number(n));
 
-`/?minus=2`
-app.get('/', (req, res) => {
-    const minus = Number(req.query.minus);
-    if (Number.isInteger(minus)) {
-        cnt -= minus;
-    } else {
-        cnt += 1
-    }    
+   let somma = 0;
+   for (let n of nums) {
+    somma += n;
+   }
+
+   const media = somma / nums.length
+
      return res.send(`
         <h1> Ciao Blog! </h2>
         <p> Questo è il nostro primo server! </p>
-        <p> Numero di accessi: ${cnt} </p>
+        <p> Somma: ${somma} </p>
+        <p> Media: ${media} </p>
     `)
 })
 
