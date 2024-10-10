@@ -62,15 +62,14 @@ app.get('/diff/:number1/:number2', (req, res) => {
         `);
 });
 
-app.get('/stats?nums=:num1&nums=:num2&nums=num3', (req, res) => {
+app.get('/stats', (req, res) => {
     const nums:number[] = (req.query.nums as string[]).map((n) => Number(n));
-
    let somma = 0;
    for (let n of nums) {
     somma += n;
    }
 
-   const media = somma / nums.length
+   const media = somma / nums.length;
 
      return res.send(`
         <h1> Ciao Blog! </h2>
